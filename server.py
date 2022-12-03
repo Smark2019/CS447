@@ -57,6 +57,7 @@ def receive():
         client.send("USERNAME : ".encode('utf-8'))
         username = client.recv(1024)
         usernames.append(username)
+        clients.append(client)
 
         print( f"Username of the client is {username}")
         broadcast(f"{username} connected to the server ! \n".encode('utf-8'))

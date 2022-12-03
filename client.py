@@ -86,7 +86,7 @@ class Client:
             try:
                 message = self.sock.recv(1024)
                 if message == 'USERNAME : ':
-                    self.sock.send(self.username.endcode('utf-8'))
+                    self.sock.send(self.username.encode('utf-8'))
 
                 else:
                     if self.gui_done:
