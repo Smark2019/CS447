@@ -3,7 +3,7 @@ import threading
 
 
 HOST = socket.gethostbyname(socket.gethostname())
-PORT = 8080
+PORT = 9090
 ADDR = (HOST, PORT)
 
 clients = []
