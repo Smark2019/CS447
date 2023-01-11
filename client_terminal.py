@@ -17,6 +17,7 @@ def connectionen():
             print("connection to host failed")
 
     username = input("Enter a username: ")
+    print("Me"+" => ",end="")
     server.send(username.encode())
 
     message_handler = threading.Thread(target=handle_messages, args=())
@@ -34,6 +35,7 @@ def handle_messages():
 def input_handler():
     while True:
         server.send((username + ': ' + input()).encode())
+        print("Me"+" => ",end="")
 
 
 connectionen()

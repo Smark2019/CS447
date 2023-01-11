@@ -67,8 +67,12 @@ class Client:
         self.win.mainloop()
 
     def write(self):
-        message = f"{self.username} : {self.input_area.get('1.0' , 'end')}"
+        message = "\n" +f"{self.username} : {self.input_area.get('1.0' , 'end')}"
         self.sock.send(message.encode('utf-8'))
+        self.text_area.config(state='normal')
+        self.text_area.insert('end', message)
+        self.text_area.yview('end')
+        self.text_area.config(state='disabled')
         self.input_area.delete('1.0' , 'end')
 
 
