@@ -20,7 +20,8 @@ class Client:
 
         self.username = simpledialog.askstring("Username",
         "Please choose a username", parent=msg)
-        
+        message = self.username
+        self.sock.send(message.encode('utf-8'))
 
         self.gui_done = False
         self.running = True
@@ -67,7 +68,7 @@ class Client:
         self.win.mainloop()
 
     def write(self):
-        message = "\n" +f"{self.username} : {self.input_area.get('1.0' , 'end')}"
+        message = f"{self.username} : {self.input_area.get('1.0' , 'end')}"
         self.sock.send(message.encode('utf-8'))
         self.text_area.config(state='normal')
         self.text_area.insert('end', message)
@@ -96,6 +97,7 @@ class Client:
                     if self.gui_done:
                         self.text_area.config(state='normal')
                         self.text_area.insert('end', message)
+                        self.text_area.insert('end', "\n")
                         self.text_area.yview('end')
                         self.text_area.config(state='disabled')
 
