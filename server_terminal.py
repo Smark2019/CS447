@@ -2,7 +2,7 @@ import socket
 import threading
 
 
-HOST = socket.gethostbyname(socket.gethostname())
+HOST = '0.0.0.0'
 PORT = 9090
 ADDR = (HOST, PORT)
 
@@ -43,7 +43,6 @@ def handle_client(conn, addr):
         try:
             msg = conn.recv(1024)
         except:
-            conn.shutdown(socket.SHUT_RDWR)
             clients.remove(conn)
             print(str(username_lookup[conn] + " left the chat."))
             broadcast(str(username_lookup[conn] +
