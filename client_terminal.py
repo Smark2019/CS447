@@ -17,6 +17,8 @@ def connectionen():
             print("connection to host failed")
 
     username = input("Enter a username: ")
+    while username == "":
+        username = input("Enter a username: ")
     print("Me"+" => ",end="")
     server.send(username.encode())
 

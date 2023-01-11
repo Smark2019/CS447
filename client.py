@@ -6,7 +6,7 @@ from tkinter import simpledialog
 
 
 
-HOST = "localhost"
+HOST = "54.144.2.54"
 PORT = 9090
 
 class Client:
@@ -20,6 +20,11 @@ class Client:
 
         self.username = simpledialog.askstring("Username",
         "Please choose a username", parent=msg)
+        
+        while self.username == "":
+            self.username = simpledialog.askstring("Username",
+            "Please choose a username", parent=msg)
+        
         message = self.username
         self.sock.send(message.encode('utf-8'))
 
