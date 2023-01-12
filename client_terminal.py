@@ -2,16 +2,16 @@ import socket
 import threading
 
 
-def connectionen():
+def init_connection():
 
     global server, username, message_handler, input_handler
 
-    server = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
+    server = socket.socket(socket.AF_INET, socket.SOCK_STREAM) # server socker definition by IPV4 and usage of TCP Protocol.
     while True:
-        try:
+        try:                                               # asks user to give the server address and port number 
             HOST = input("host ip: ")
             PORT = int(input("host port: "))
-            server.connect((HOST, PORT))
+            server.connect((HOST, PORT))                   # server connection is established
             break
         except:
             print("connection to host failed")
@@ -20,24 +20,24 @@ def connectionen():
     while username == "":
         username = input("Enter a username: ")
     print("Me"+" => ",end="")
-    server.send(username.encode())
+    server.send(username.encode())          # based on rule, username of the client (first message) automatically sent to server.
 
-    message_handler = threading.Thread(target=handle_messages, args=())
+    message_handler = threading.Thread(target=handle_messages, args=()) # thread for coming messages from rest of the clients.
     message_handler.start()
 
-    input_handler = threading.Thread(target=input_handler, args=())
+    input_handler = threading.Thread(target=handle_input, args=()) # thread for client's sending message for rest of the clients.
     input_handler.start()
 
 
 def handle_messages():
     while True:
-        print(server.recv(1024).decode())
+        print(server.recv(1024).decode())  # prints coming messages to the terminal
 
 
-def input_handler():
+def handle_input():
     while True:
-        server.send((username + ': ' + input()).encode())
+        server.send((username + ': ' + input()).encode()) # sends the message of the client to rest of the clients with the its username
         print("Me"+" => ",end="")
 
 
-connectionen()
+init_connection() # initilize the connection to the server.
